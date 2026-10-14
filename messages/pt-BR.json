@@ -1,0 +1,142 @@
+{
+  "ui": {
+    "home": "Início", "about": "Quem somos", "what": "O que fazemos", "social": "Redes sociais",
+    "overview": "Visão geral", "map": "Mapa", "back": "Voltar", "prev": "Anterior", "next": "Próximo",
+    "theme": "Alternar tema claro e escuro", "language": "Mudar idioma", "site": "Site",
+    "modules": "Toque em um módulo para ver os detalhes"
+  },
+  "welcome": {
+    "kicker": "Seja bem-vindo",
+    "title": "Bem-vindo",
+    "group": "Grupo Tool Services",
+    "text": "Ferramentas de usinagem, gestão de ferramentas e software industrial, reunidos em três empresas. Toque em uma delas ou em Começar para conhecer o grupo.",
+    "cta": "Começar",
+    "hint": "Arraste para explorar, use dois dedos para aproximar ou role o mouse para avançar."
+  },
+  "about": {
+    "title": "Quem somos",
+    "lead": "Fabricamos e recondicionamos ferramentas de usinagem, gerenciamos essas ferramentas dentro da fábrica do cliente e criamos o software que dá controle ao processo. Cada empresa resolve uma parte, e juntas cobrem o caminho todo.",
+    "sectors": "Atendemos os setores automobilístico, aeroespacial, oil & gas e outros segmentos exigentes.",
+    "pick": "Toque em uma empresa para conhecer",
+    "stats": [
+      { "value": "+25", "label": "anos de experiência em ferramentas para usinagem" },
+      { "value": "3", "label": "empresas que se complementam" },
+      { "value": "ISO 9001", "label": "certificação de qualidade da TSM Tools" },
+      { "value": "30%", "label": "menos consumo de ferramentas, segundo a Tool Services" }
+    ]
+  },
+  "companies": {
+    "m3code": {
+      "name": "M3 Code",
+      "tagline": "Smart Systems",
+      "intro": "Desenvolve sistemas sob medida para a indústria, de qualquer porte. Elimina tarefas manuais e repetitivas para dar mais controle e precisão à gestão.",
+      "highlight": "Nossa missão: apresentar soluções inovadoras e funcionais que melhorem a produtividade dos clientes.",
+      "role": "Software",
+      "roleText": "Cria sistemas sob medida para gestão da produção, notas fiscais e modernização de sistemas legados.",
+      "modules": {
+        "sob_demanda": {
+          "title": "Software sob demanda",
+          "text": "Software desenvolvido conforme a necessidade de cada cliente, no formato que a operação dele pede. O processo segue quatro etapas: assessment, estratégia, desenvolvimento e acompanhamento.",
+          "points": ["Assessment das necessidades", "Estratégia e desenvolvimento", "Acompanhamento depois da entrega"]
+        },
+        "industria": {
+          "title": "Gestão industrial e da produção",
+          "text": "Sistema com funcionalidades integradas, que se adapta às particularidades de cada indústria e entrega informação precisa para decidir. Inclui rastreabilidade de todo o ciclo de vida dos materiais.",
+          "points": ["Controle e rastreabilidade dos materiais", "Dados precisos para a decisão", "Uma solução integrada no lugar de vários sistemas"]
+        },
+        "nfe": {
+          "title": "Gestão de notas fiscais",
+          "text": "Sistema que captura automaticamente as notas fiscais direto da SEFAZ, sem digitação.",
+          "points": ["Captura automática", "Menos tarefas manuais", "Notas organizadas para a gestão"]
+        },
+        "legados": {
+          "title": "Modernização, nuvem e microsserviços",
+          "text": "Substitui plataformas antigas por soluções modernas, multiplataforma e em nuvem. A arquitetura de microsserviços divide a aplicação em componentes pequenos e independentes.",
+          "points": ["Modernização de sistemas legados", "Projetos de cloud computing", "Sistemas multiplataforma"]
+        }
+      }
+    },
+    "tsmtools": {
+      "name": "TSM Tools",
+      "tagline": "Technology and Smart Manufacturing",
+      "intro": "Nasceu de mais de 25 anos no mercado de ferramentas para usinagem. Atende os setores automobilístico, aeroespacial, oil & gas e outros.",
+      "highlight": "Certificada ISO 9001, com inspeção de cada ferramenta e melhoria contínua dos processos.",
+      "role": "Peças e ferramentas",
+      "roleText": "Projeta, fabrica e recondiciona ferramentas de usinagem, como brocas, fresas, alargadores e escareadores.",
+      "modules": {
+        "desenvolvimento": {
+          "title": "Desenvolvimento de ferramentas especiais",
+          "text": "Soluções sob medida para desafios únicos. Criamos ferramentas especiais com precisão, tecnologia e inovação para as demandas mais exigentes do mercado.",
+          "points": ["Projeto sob medida", "Precisão e tecnologia", "Para demandas exigentes"]
+        },
+        "fabricacao": {
+          "title": "Fabricação de ferramentas",
+          "text": "Do conceito à realidade, fabricamos ferramentas especiais e standard que aumentam a produtividade, com qualidade garantida.",
+          "points": ["Brocas, fresas, alargadores e escareadores", "Especiais e standard", "Qualidade garantida"]
+        },
+        "recondicionamento": {
+          "title": "Recondicionamento (afiação)",
+          "text": "Transformamos ferramentas desgastadas em ferramentas de alta performance, com precisão e economia.",
+          "points": ["Ferramentas em HSS, MD e CBN", "Eficiência renovada", "Economia para o cliente"]
+        },
+        "engenharia": {
+          "title": "Engenharia de aplicação",
+          "text": "Melhoria dos processos de usinagem. A engenharia de aplicação otimiza o processo e transforma desafios em eficiência.",
+          "points": ["Análise do processo de usinagem", "Otimização de resultados", "Foco em eficiência"]
+        }
+      }
+    },
+    "toolservices": {
+      "name": "Tool Services",
+      "tagline": "Gerenciamento e recondicionamento de ferramentas",
+      "intro": "Analisa, orienta e otimiza processos para reduzir o custo do produto final. Controla a vida útil das ferramentas e reduz o tempo de set-up.",
+      "highlight": "Segundo a empresa: 30% menos consumo, 60% mais agilidade na localização e separação de ferramentas e 90% menos danos.",
+      "role": "Gerenciamento",
+      "roleText": "Controla o ciclo da ferramenta na fábrica do cliente, da compra ao descarte, para aumentar a vida útil e reduzir custos.",
+      "modules": {
+        "logistica": {
+          "title": "Logística",
+          "text": "Coordena o pedido de compra de ferramentas, o controle de estoque, o fornecedor e a entrega, o que reduz o lead time.",
+          "points": ["Pedido de compra", "Controle de estoque", "Menor lead time"]
+        },
+        "presetting": {
+          "title": "Presetting",
+          "text": "Controle de estoque flutuante, com coleta e entrega, análises, reposição, montagem, medições e armazenagem das ferramentas.",
+          "points": ["Montagem e medição", "Reposição", "Armazenagem"]
+        },
+        "recondicionamento": {
+          "title": "Recondicionamento",
+          "text": "Estudos de desgaste, reafiação da ferramenta, testes de novas geometrias, logística e orientação técnica aos fornecedores.",
+          "points": ["Estudo de desgaste", "Reafiação", "Testes de novas geometrias"]
+        },
+        "suporte": {
+          "title": "Suporte e treinamento",
+          "text": "Apoio no desenvolvimento de novos produtos e tecnologias, na melhoria da produtividade e no treinamento dos operadores de máquinas.",
+          "points": ["Novos produtos e tecnologias", "Mais produtividade", "Treinamento de operadores"]
+        }
+      }
+    }
+  },
+  "what": {
+    "title": "O que fazemos",
+    "lead": "Três frentes que se encaixam: a ferramenta, a gestão da ferramenta e o software que controla o processo.",
+    "more": "Conhecer a empresa"
+  },
+  "social": {
+    "title": "Redes sociais",
+    "lead": "Aponte a câmera do celular para o código e acompanhe o grupo."
+  },
+  "overview": {
+    "title": "Visão geral",
+    "processes": "Como trabalhamos",
+    "flows": {
+      "tsmtools": ["Projeto", "Fabricação", "Recondicionamento", "Engenharia de aplicação"],
+      "toolservices": ["Analisar", "Orientar", "Otimizar"],
+      "m3code": ["Assessment", "Estratégia", "Desenvolvimento", "Acompanhamento"]
+    },
+    "thanks": "Obrigado pela visita",
+    "thanksText": "Foi um prazer receber você. Se quiser conversar sobre ferramentas, gestão ou software, fale com a gente.",
+    "phone": "Telefone",
+    "address": "Endereço"
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "ui": {
+    "home": "Home", "about": "About us", "what": "What we do", "social": "Social media",
+    "overview": "Overview", "map": "Map", "back": "Back", "prev": "Previous", "next": "Next",
+    "theme": "Switch light and dark theme", "language": "Change language", "site": "Website",
+    "modules": "Tap a module to see the details"
+  },
+  "welcome": {
+    "kicker": "Welcome",
+    "title": "Welcome",
+    "group": "Tool Services Group",
+    "text": "Machining tools, tool management and industrial software, brought together in three companies. Tap one of them or Start to get to know the group.",
+    "cta": "Start",
+    "hint": "Drag to explore, pinch to zoom or scroll the mouse wheel to move on."
+  },
+  "about": {
+    "title": "About us",
+    "lead": "We make and recondition machining tools, manage those tools inside the customer's plant and build the software that keeps the process under control. Each company solves one part, and together they cover the whole path.",
+    "sectors": "We serve the automotive, aerospace, oil & gas and other demanding sectors.",
+    "pick": "Tap a company to learn more",
+    "stats": [
+      { "value": "25+", "label": "years of experience in machining tools" },
+      { "value": "3", "label": "companies that complement each other" },
+      { "value": "ISO 9001", "label": "quality certification held by TSM Tools" },
+      { "value": "30%", "label": "lower tool consumption, according to Tool Services" }
+    ]
+  },
+  "companies": {
+    "m3code": {
+      "name": "M3 Code",
+      "tagline": "Smart Systems",
+      "intro": "Builds custom systems for industry of any size. It removes manual, repetitive tasks to give management more control and accuracy.",
+      "highlight": "Our mission: deliver innovative, functional solutions that improve our customers' productivity.",
+      "role": "Software",
+      "roleText": "Builds custom systems for production management, invoices and the modernization of legacy systems.",
+      "modules": {
+        "sob_demanda": {
+          "title": "On-demand software",
+          "text": "Software built around each customer's needs, in the format their operation requires. The process has four steps: assessment, strategy, development and follow-up.",
+          "points": ["Needs assessment", "Strategy and development", "Follow-up after delivery"]
+        },
+        "industria": {
+          "title": "Industrial and production management",
+          "text": "An integrated system that adapts to the particulars of each plant and delivers accurate information for decisions. It includes traceability across the whole life cycle of materials.",
+          "points": ["Material control and traceability", "Accurate data for decisions", "One integrated solution instead of many systems"]
+        },
+        "nfe": {
+          "title": "Invoice management",
+          "text": "A system that captures invoices automatically straight from SEFAZ, with no manual typing.",
+          "points": ["Automatic capture", "Fewer manual tasks", "Invoices organized for management"]
+        },
+        "legados": {
+          "title": "Modernization, cloud and microservices",
+          "text": "Replaces old platforms with modern, cross-platform, cloud-based solutions. A microservices architecture splits the application into small, independent components.",
+          "points": ["Legacy system modernization", "Cloud computing projects", "Cross-platform systems"]
+        }
+      }
+    },
+    "tsmtools": {
+      "name": "TSM Tools",
+      "tagline": "Technology and Smart Manufacturing",
+      "intro": "Born from more than 25 years in the machining tools market. It serves the automotive, aerospace, oil & gas and other sectors.",
+      "highlight": "ISO 9001 certified, with inspection of every tool and continuous process improvement.",
+      "role": "Parts and tools",
+      "roleText": "Designs, makes and reconditions machining tools such as drills, milling cutters, reamers and countersinks.",
+      "modules": {
+        "desenvolvimento": {
+          "title": "Special tool development",
+          "text": "Custom solutions for unique challenges. We create special tools with precision, technology and innovation for the most demanding markets.",
+          "points": ["Custom design", "Precision and technology", "For demanding applications"]
+        },
+        "fabricacao": {
+          "title": "Tool manufacturing",
+          "text": "From concept to reality, we make special and standard tools that raise productivity, with guaranteed quality.",
+          "points": ["Drills, milling cutters, reamers and countersinks", "Special and standard", "Guaranteed quality"]
+        },
+        "recondicionamento": {
+          "title": "Reconditioning (sharpening)",
+          "text": "We turn worn tools into high-performance tools, with precision and savings.",
+          "points": ["HSS, carbide and CBN tools", "Renewed efficiency", "Savings for the customer"]
+        },
+        "engenharia": {
+          "title": "Application engineering",
+          "text": "Improvement of machining processes. Application engineering optimizes the process and turns challenges into efficiency.",
+          "points": ["Machining process analysis", "Optimized results", "Focus on efficiency"]
+        }
+      }
+    },
+    "toolservices": {
+      "name": "Tool Services",
+      "tagline": "Tool management and reconditioning",
+      "intro": "Analyzes, guides and optimizes processes to lower the cost of the final product. It controls tool life and reduces set-up time.",
+      "highlight": "According to the company: 30% lower consumption, 60% faster tool location and picking, and 90% less damage.",
+      "role": "Management",
+      "roleText": "Controls the tool cycle inside the customer's plant, from purchase to disposal, to extend tool life and cut costs.",
+      "modules": {
+        "logistica": {
+          "title": "Logistics",
+          "text": "Coordinates tool purchase orders, stock control, suppliers and delivery, which shortens lead time.",
+          "points": ["Purchase orders", "Stock control", "Shorter lead time"]
+        },
+        "presetting": {
+          "title": "Presetting",
+          "text": "Floating stock control, including pickup and delivery, analysis, replenishment, assembly, measurement and storage of tools.",
+          "points": ["Assembly and measurement", "Replenishment", "Storage"]
+        },
+        "recondicionamento": {
+          "title": "Reconditioning",
+          "text": "Wear studies, tool resharpening, tests of new geometries, logistics and technical guidance for suppliers.",
+          "points": ["Wear studies", "Resharpening", "New geometry tests"]
+        },
+        "suporte": {
+          "title": "Support and training",
+          "text": "Support for developing new products and technologies, improving productivity and training machine operators.",
+          "points": ["New products and technologies", "Higher productivity", "Operator training"]
+        }
+      }
+    }
+  },
+  "what": {
+    "title": "What we do",
+    "lead": "Three fronts that fit together: the tool, the management of the tool and the software that controls the process.",
+    "more": "Meet the company"
+  },
+  "social": {
+    "title": "Social media",
+    "lead": "Point your phone camera at the code and follow the group."
+  },
+  "overview": {
+    "title": "Overview",
+    "processes": "How we work",
+    "flows": {
+      "tsmtools": ["Design", "Manufacturing", "Reconditioning", "Application engineering"],
+      "toolservices": ["Analyze", "Guide", "Optimize"],
+      "m3code": ["Assessment", "Strategy", "Development", "Follow-up"]
+    },
+    "thanks": "Thank you for visiting",
+    "thanksText": "It was a pleasure to host you. If you want to talk about tools, management or software, get in touch.",
+    "phone": "Phone",
+    "address": "Address"
+  }
+}
