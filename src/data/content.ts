@@ -71,6 +71,11 @@ export const COMPANY: Record<
 export const CONTACT = { phone: "(12) 3931-6700" };
 export const WELCOME_PHOTO = "/img/welcome.jpg";
 
+// Fotos em alta resolução (opcional): salve em public/img/hd/<empresa>-<módulo>.jpg
+// (ex.: tsmtools-engenharia.jpg) ou public/img/hd/<empresa>-hero.jpg. Se existir, é usada no lugar da foto do site.
+export const hd = (company: string, key: string) =>
+  `/img/hd/${company}-${key}.jpg`;
+
 /* ---------- clientes e parceiros (nomes de marca, iguais em qualquer idioma) ---------- */
 // m3code: lista tirada da seção de clientes do m3code.com.br.
 // tsmtools / toolservices: os sites só mostram logos (sem texto), então estes nomes são os que você citou.
@@ -102,16 +107,14 @@ export const PARTNERS: Record<CompanyId, string[]> = {
     "Scania",
     "Netzsch",
     "General Motors",
-    "Andri Tools"
+    "Andri Tools",
   ],
   toolservices: ["Cummins", "Sandvik Coromant", "T-nax"],
 };
-export const ALL_PARTNERS = Array.from(
-  Array(13),
-  (_, i) => PARTNERS[COMPANY_IDS[13 % COMPANY_IDS.length]][i % 13],
-).flat();
-// new Set(COMPANY_IDS.flatMap((c) => PARTNERS[c])),
-
+// Faixa da tela "O que fazemos": 13 nomes da lista da TSM Tools (mesmo resultado da sua versão de teste).
+// Para mostrar todos os parceiros de todas as empresas, troque por:
+//   Array.from(new Set(COMPANY_IDS.flatMap((c) => PARTNERS[c])))
+export const ALL_PARTNERS = PARTNERS.tsmtools.slice(0, 13);
 
 /* ---------- árvore de telas ---------- */
 export type Kind =
@@ -139,6 +142,13 @@ const ABOUT_BOXES = [
   { x: 120, y: 690, w: 520 },
   { x: 700, y: 690, w: 520 },
   { x: 1280, y: 690, w: 520 },
+];
+// Ordem em "O que fazemos": peças, gerenciamento, software.
+const WHAT_ORDER: CompanyId[] = ["tsmtools", "toolservices", "m3code"];
+const WHAT_BOXES = [
+  { x: 60, y: 390, w: 560 },
+  { x: 680, y: 390, w: 560 },
+  { x: 1300, y: 390, w: 560 },
 ];
 const MODULE_BOXES = [
   { x: 900, y: 330, w: 420 },
@@ -175,12 +185,12 @@ export const NODES: NodeInfo[] = [
     ),
   ),
   // Telas "O que fazemos + clientes e parceiros", dentro de "what".
-  ...COMPANY_IDS.map(
+  ...WHAT_ORDER.map(
     (c, i): NodeInfo => ({
       id: `what.${c}`,
       kind: "service",
       parent: "what",
-      box: ABOUT_BOXES[i],
+      box: WHAT_BOXES[i],
       company: c,
     }),
   ),
@@ -264,7 +274,7 @@ export const PATH = [
     ...COMPANY[c].modules.map((m) => `${c}.${m.id}`),
   ]),
   "what",
-  ...COMPANY_IDS.map((c) => `what.${c}`),
+  ...WHAT_ORDER.map((c) => `what.${c}`),
   "social",
   "overview",
 ];

@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { QRCodeSVG } from "qrcode.react";
 import {
@@ -10,76 +9,26 @@ import {
   COMPANY_IDS,
   PARTNERS,
   WELCOME_PHOTO,
+  hd,
   type CompanyId,
   type NodeInfo,
 } from "@/data/content";
+import { Art, ICON } from "./Art";
 
-// Se a foto principal não existir (download falhou), a segunda camada (fallback) aparece no lugar.
+// Camadas de fundo: a primeira que existir aparece. Assim uma foto em alta resolução (public/img/hd) vence a do site,
+// e se nada existir sobra a foto principal da empresa ou a cor de fundo.
 const Photo = ({
-  src,
-  fallback,
+  srcs,
   className = "",
 }: {
-  src: string;
-  fallback?: string;
+  srcs: string[];
   className?: string;
 }) => (
   <div
     className={`photo ${className}`}
-    style={{
-      backgroundImage: [src, fallback]
-        .filter(Boolean)
-        .map((u) => `url(${u})`)
-        .join(", "),
-    }}
+    style={{ backgroundImage: srcs.map((u) => `url(${u})`).join(", ") }}
   />
 );
-
-// Foto nítida: a imagem aparece inteira no tamanho natural (sem esticar para cobrir o painel),
-// e uma versão desfocada da mesma foto preenche o fundo.
-function PhotoFit({
-  src,
-  fallback,
-  c,
-  className = "",
-}: {
-  src: string;
-  fallback?: string;
-  c?: CompanyId;
-  className?: string;
-}) {
-  const [s, setS] = useState(src);
-  const [dead, setDead] = useState(false); // nenhuma das duas imagens existe em public/img
-  const ref = useRef<HTMLImageElement>(null);
-  const fail = () =>
-    fallback && s !== fallback ? setS(fallback) : setDead(true);
-  // Se a imagem falhou antes do React "ligar" o onError (renderização no servidor), checa de novo aqui.
-  useEffect(() => {
-    const el = ref.current;
-    if (el && el.complete && el.naturalWidth === 0) fail();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [s]);
-  return (
-    <div className={`pfit ${className}`}>
-      {dead ? (
-        <div className="pf-empty">{c && <Logo c={c} />}</div>
-      ) : (
-        <>
-          <div className="pf-bg" style={{ backgroundImage: `url(${s})` }} />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            ref={ref}
-            className="pf-main"
-            src={s}
-            alt=""
-            draggable={false}
-            onError={fail}
-          />
-        </>
-      )}
-    </div>
-  );
-}
 
 function Qr({ url, size }: { url: string; size: number }) {
   return (
@@ -125,9 +74,13 @@ export function CardFace({ node }: { node: NodeInfo }) {
   if (node.kind === "service") {
     return (
       <>
-        <Logo c={node.company!} />
-        <strong>{t(`${node.company}.role`)}</strong>
-        <span>{t(`${node.company}.roleText`)}</span>
+        <div className="wc-ico">
+          <Art kind={ICON[node.company!]} strokeWidth={3.5} />
+        </div>
+        <div className="wc-text">
+          <strong>{t(`${node.company}.role`)}</strong>
+          <span>{t(`${node.company}.roleText`)}</span>
+        </div>
       </>
     );
   }
@@ -143,7 +96,7 @@ function Welcome() {
   const t = useTranslations("welcome");
   return (
     <div className="slide welcome">
-      <Photo src={WELCOME_PHOTO} className="wphoto" />
+      <Photo srcs={[WELCOME_PHOTO]} className="wphoto" />
       <div className="wcopy">
         <p className="kicker">{t("kicker")}</p>
         <h1 className="display">{t("title")}</h1>
@@ -194,7 +147,7 @@ function Company({ node }: { node: NodeInfo }) {
   const u = useTranslations("ui");
   return (
     <div className="slide company">
-      <Photo src={d.hero} className="hero" />
+      <Photo srcs={[hd(c, "hero"), d.hero]} className="hero" />
       <div className="company-copy">
         <Logo c={c} />
         <h2 className="title">{t(`${c}.tagline`)}</h2>
@@ -224,7 +177,15 @@ function Module({ node }: { node: NodeInfo }) {
   const points = t.raw("points") as string[];
   return (
     <div className="slide module">
-      <PhotoFit src={img} fallback={COMPANY[c].hero} c={c} className="side" />
+      {/* A foto fica em moldura de tamanho limitado: ampliar menos mantém a nitidez. */}
+      <div className="frame">
+        <Photo srcs={[hd(c, m), img, COMPANY[c].hero]} />
+        <i className="cn tl" />
+        <i className="cn tr" />
+        <i className="cn bl" />
+        <i className="cn br" />
+      </div>
+      <div className="ruler" />
       <div className="module-copy">
         <Logo c={c} />
         <h2 className="title">{t("title")}</h2>
@@ -260,7 +221,7 @@ function What() {
           <span className="chip more-chip">{d("more")}</span>
         </div>
       </div>
-      <p className="pick">{d("pick")}</p>
+      <p className="pick wpick">{d("pick")}</p>
     </div>
   );
 }
@@ -273,7 +234,12 @@ function Service({ node }: { node: NodeInfo }) {
   return (
     <div className="slide service">
       <div className="service-copy">
-        <Logo c={c} />
+        <div className="service-head">
+          <div className="ico">
+            <Art kind={ICON[c]} strokeWidth={3} />
+          </div>
+          <Logo c={c} />
+        </div>
         <h2 className="title">{co(`${c}.role`)}</h2>
         <p className="lead">{t(`${c}.lead`)}</p>
         <h3 className="sub">{t("doTitle")}</h3>
