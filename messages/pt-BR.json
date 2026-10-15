@@ -138,5 +138,27 @@
     "thanksText": "Foi um prazer receber você. Se quiser conversar sobre ferramentas, gestão ou software, fale com a gente.",
     "phone": "Telefone",
     "address": "Endereço"
+  },
+  "closing": {
+    "communion": "Mais do que fornecedores, queremos fazer parte da sua história. Cada ferramenta afiada, cada sistema entregue e cada processo melhorado nasce de uma conversa franca com quem faz a indústria andar. Obrigado por caminhar conosco.",
+    "quote": "Aquilo que temos de aprender a fazer, aprendemos fazendo.",
+    "author": "Aristóteles"
+  },
+  "detail": {
+    "bandTitle": "Empresas que confiam no grupo",
+    "pick": "Toque em uma empresa para ver o que fazemos e quem atendemos",
+    "doTitle": "O que fazemos",
+    "partnersTitle": "Clientes e parceiros",
+    "more": "e muitas outras",
+    "m3code": {
+      "lead": "Sistemas sob medida para a indústria: automatizamos tarefas repetitivas e damos controle e rastreabilidade a toda a operação."
+    },
+    "tsmtools": {
+      "lead": "Projetamos, fabricamos e recondicionamos ferramentas de usinagem, com mais de 25 anos de experiência no mercado."
+    },
+    "toolservices": {
+      "lead": "Gerenciamos o ciclo de vida das ferramentas, do pedido ao descarte, para reduzir custos e prolongar a vida útil."
+    }
   }
 }
+
