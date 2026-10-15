@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { QRCodeSVG } from "qrcode.react";
 import {
@@ -8,7 +8,6 @@ import {
   BY_ID,
   COMPANY,
   COMPANY_IDS,
-  CONTACT,
   PARTNERS,
   WELCOME_PHOTO,
   type CompanyId,
@@ -41,24 +40,43 @@ const Photo = ({
 function PhotoFit({
   src,
   fallback,
+  c,
   className = "",
 }: {
   src: string;
   fallback?: string;
+  c?: CompanyId;
   className?: string;
 }) {
   const [s, setS] = useState(src);
+  const [dead, setDead] = useState(false); // nenhuma das duas imagens existe em public/img
+  const ref = useRef<HTMLImageElement>(null);
+  const fail = () =>
+    fallback && s !== fallback ? setS(fallback) : setDead(true);
+  // Se a imagem falhou antes do React "ligar" o onError (renderização no servidor), checa de novo aqui.
+  useEffect(() => {
+    const el = ref.current;
+    if (el && el.complete && el.naturalWidth === 0) fail();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [s]);
   return (
     <div className={`pfit ${className}`}>
-      <div className="pf-bg" style={{ backgroundImage: `url(${s})` }} />
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        className="pf-main"
-        src={s}
-        alt=""
-        draggable={false}
-        onError={() => fallback && s !== fallback && setS(fallback)}
-      />
+      {dead ? (
+        <div className="pf-empty">{c && <Logo c={c} />}</div>
+      ) : (
+        <>
+          <div className="pf-bg" style={{ backgroundImage: `url(${s})` }} />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            ref={ref}
+            className="pf-main"
+            src={s}
+            alt=""
+            draggable={false}
+            onError={fail}
+          />
+        </>
+      )}
     </div>
   );
 }
@@ -206,7 +224,7 @@ function Module({ node }: { node: NodeInfo }) {
   const points = t.raw("points") as string[];
   return (
     <div className="slide module">
-      <PhotoFit src={img} fallback={COMPANY[c].hero} className="side" />
+      <PhotoFit src={img} fallback={COMPANY[c].hero} c={c} className="side" />
       <div className="module-copy">
         <Logo c={c} />
         <h2 className="title">{t("title")}</h2>
@@ -354,10 +372,12 @@ function Overview() {
         <blockquote className="quote">
           “{x("quote")}”<cite>{x("author")}</cite>
         </blockquote>
-        <dl>
-          <dt>{t("phone")}</dt>
-          <dd>{CONTACT.phone}</dd>
-        </dl>
+        <blockquote className="quote">
+          “{x("quote2")}”<cite>{x("author2")}</cite>
+        </blockquote>
+        <blockquote className="quote">
+          “{x("quote3")}”<cite>{x("author3")}</cite>
+        </blockquote>
       </aside>
     </div>
   );

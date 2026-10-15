@@ -44,10 +44,10 @@ export const COMPANY: Record<
     logoWhite: "/logos/tsmtools.png",
     logoBlack: "/logos/tsmtools-black.png",
     modules: [
-      { id: "desenvolvimento", img: "/img/tsm-ind1.jpg" },
-      { id: "fabricacao", img: "/img/tsm-ind2.jpg" },
-      { id: "recondicionamento", img: "/img/tsm-ind3.jpg" },
-      { id: "engenharia", img: "/img/tsm-ind4.jpg" },
+      { id: "desenvolvimento", img: "/img/tsm-ind2.jpg" },
+      { id: "fabricacao", img: "/img/tsm-ind3.jpg" },
+      { id: "recondicionamento", img: "/img/tsm-ind4.jpg" },
+      { id: "engenharia", img: "/img/tsm-ind5.jpg" },
     ],
     socials: [], // TODO: { label: 'Instagram', url: '...' }
   },

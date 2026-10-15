@@ -269,6 +269,17 @@ button {
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
 }
 
+.pf-empty {
+  position: absolute;
+  inset: 0 130px 0 0;
+  display: grid;
+  place-items: center;
+}
+.pf-empty .logo {
+  height: 120px;
+  opacity: 0.55;
+}
+
 /* ---------- miniaturas (cards): só texto, sem fotos ---------- */
 .card {
   position: absolute;
@@ -748,7 +759,7 @@ button {
   top: 0;
   bottom: 0;
   width: 580px;
-  padding: 80px 56px;
+  padding: 70px 48px;
   background: var(--ink);
   color: var(--bg);
 }
@@ -761,8 +772,8 @@ button {
   color: inherit;
 }
 .quote {
-  margin-top: 36px;
-  padding-left: 22px;
+  margin-top: 26px;
+  padding-left: 20px;
   border-left: 5px solid var(--bg);
   font-size: 26px;
   line-height: 1.35;
@@ -770,9 +781,9 @@ button {
 }
 .quote cite {
   display: block;
-  margin-top: 12px;
+  margin-top: 8px;
   font-style: normal;
-  font-size: 22px;
+  font-size: 19px;
   opacity: 0.7;
 }
 .thanks dl {
