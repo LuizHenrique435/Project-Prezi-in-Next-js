@@ -1,8 +1,17 @@
 {
   "ui": {
-    "home": "Home", "about": "About us", "what": "What we do", "social": "Social media",
-    "overview": "Overview", "map": "Map", "back": "Back", "prev": "Previous", "next": "Next",
-    "theme": "Switch light and dark theme", "language": "Change language", "site": "Website",
+    "home": "Home",
+    "about": "About us",
+    "what": "What we do",
+    "social": "Social media",
+    "overview": "Overview",
+    "map": "Map",
+    "back": "Back",
+    "prev": "Previous",
+    "next": "Next",
+    "theme": "Switch light and dark theme",
+    "language": "Change language",
+    "site": "Website",
     "modules": "Tap a module to see the details"
   },
   "welcome": {
@@ -21,8 +30,14 @@
     "stats": [
       { "value": "25+", "label": "years of experience in machining tools" },
       { "value": "3", "label": "companies that complement each other" },
-      { "value": "ISO 9001", "label": "quality certification held by TSM Tools" },
-      { "value": "30%", "label": "lower tool consumption, according to Tool Services" }
+      {
+        "value": "ISO 9001",
+        "label": "quality certification held by TSM Tools"
+      },
+      {
+        "value": "30%",
+        "label": "lower tool consumption, according to Tool Services"
+      }
     ]
   },
   "companies": {
@@ -37,22 +52,38 @@
         "sob_demanda": {
           "title": "On-demand software",
           "text": "Software built around each customer's needs, in the format their operation requires. The process has four steps: assessment, strategy, development and follow-up.",
-          "points": ["Needs assessment", "Strategy and development", "Follow-up after delivery"]
+          "points": [
+            "Needs assessment",
+            "Strategy and development",
+            "Follow-up after delivery"
+          ]
         },
         "industria": {
           "title": "Industrial and production management",
           "text": "An integrated system that adapts to the particulars of each plant and delivers accurate information for decisions. It includes traceability across the whole life cycle of materials.",
-          "points": ["Material control and traceability", "Accurate data for decisions", "One integrated solution instead of many systems"]
+          "points": [
+            "Material control and traceability",
+            "Accurate data for decisions",
+            "One integrated solution instead of many systems"
+          ]
         },
         "nfe": {
           "title": "Invoice management",
           "text": "A system that captures invoices automatically straight from SEFAZ, with no manual typing.",
-          "points": ["Automatic capture", "Fewer manual tasks", "Invoices organized for management"]
+          "points": [
+            "Automatic capture",
+            "Fewer manual tasks",
+            "Invoices organized for management"
+          ]
         },
         "legados": {
           "title": "Modernization, cloud and microservices",
           "text": "Replaces old platforms with modern, cross-platform, cloud-based solutions. A microservices architecture splits the application into small, independent components.",
-          "points": ["Legacy system modernization", "Cloud computing projects", "Cross-platform systems"]
+          "points": [
+            "Legacy system modernization",
+            "Cloud computing projects",
+            "Cross-platform systems"
+          ]
         }
       }
     },
@@ -67,22 +98,38 @@
         "desenvolvimento": {
           "title": "Special tool development",
           "text": "Custom solutions for unique challenges. We create special tools with precision, technology and innovation for the most demanding markets.",
-          "points": ["Custom design", "Precision and technology", "For demanding applications"]
+          "points": [
+            "Custom design",
+            "Precision and technology",
+            "For demanding applications"
+          ]
         },
         "fabricacao": {
           "title": "Tool manufacturing",
           "text": "From concept to reality, we make special and standard tools that raise productivity, with guaranteed quality.",
-          "points": ["Drills, milling cutters, reamers and countersinks", "Special and standard", "Guaranteed quality"]
+          "points": [
+            "Drills, milling cutters, reamers and countersinks",
+            "Special and standard",
+            "Guaranteed quality"
+          ]
         },
         "recondicionamento": {
           "title": "Reconditioning (sharpening)",
           "text": "We turn worn tools into high-performance tools, with precision and savings.",
-          "points": ["HSS, carbide and CBN tools", "Renewed efficiency", "Savings for the customer"]
+          "points": [
+            "HSS, carbide and CBN tools",
+            "Renewed efficiency",
+            "Savings for the customer"
+          ]
         },
         "engenharia": {
           "title": "Application engineering",
           "text": "Improvement of machining processes. Application engineering optimizes the process and turns challenges into efficiency.",
-          "points": ["Machining process analysis", "Optimized results", "Focus on efficiency"]
+          "points": [
+            "Machining process analysis",
+            "Optimized results",
+            "Focus on efficiency"
+          ]
         }
       }
     },
@@ -112,7 +159,11 @@
         "suporte": {
           "title": "Support and training",
           "text": "Support for developing new products and technologies, improving productivity and training machine operators.",
-          "points": ["New products and technologies", "Higher productivity", "Operator training"]
+          "points": [
+            "New products and technologies",
+            "Higher productivity",
+            "Operator training"
+          ]
         }
       }
     }
@@ -130,7 +181,12 @@
     "title": "Overview",
     "processes": "How we work",
     "flows": {
-      "tsmtools": ["Design", "Manufacturing", "Reconditioning", "Application engineering"],
+      "tsmtools": [
+        "Design",
+        "Manufacturing",
+        "Reconditioning",
+        "Application engineering"
+      ],
       "toolservices": ["Analyze", "Guide", "Optimize"],
       "m3code": ["Assessment", "Strategy", "Development", "Follow-up"]
     },
@@ -138,5 +194,26 @@
     "thanksText": "It was a pleasure to host you. If you want to talk about tools, management or software, get in touch.",
     "phone": "Phone",
     "address": "Address"
+  },
+  "closing": {
+    "communion": "More than suppliers, we want to be part of your story. Every sharpened tool, every system delivered and every process improved starts with an honest conversation with the people who keep industry moving. Thank you for walking with us.",
+    "quote": "For the things we have to learn before we can do them, we learn by doing them.",
+    "author": "Aristotle"
+  },
+  "detail": {
+    "bandTitle": "Companies that trust the group",
+    "pick": "Tap a company to see what we do and who we serve",
+    "doTitle": "What we do",
+    "partnersTitle": "Clients and partners",
+    "more": "and many more",
+    "m3code": {
+      "lead": "Custom systems for industry: we automate repetitive tasks and give control and traceability to the whole operation."
+    },
+    "tsmtools": {
+      "lead": "We design, manufacture and recondition machining tools, with over 25 years of experience in the market."
+    },
+    "toolservices": {
+      "lead": "We manage the tool life cycle, from purchase order to disposal, to cut costs and extend tool life."
+    }
   }
 }
