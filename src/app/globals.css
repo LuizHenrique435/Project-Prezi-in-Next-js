@@ -3,7 +3,7 @@
   --bg: #11161a;
   --bg2: #1a2127;
   --grid: #1a2126;
-  --doodle: #25313a;
+  --deco: #2d3a45;
   --ink: #eef2f5;
   --muted: #98a4af;
   --line: #2f3a43;
@@ -23,7 +23,7 @@
   --bg: #eef1f3;
   --bg2: #ffffff;
   --grid: #dde3e7;
-  --doodle: #cfd7dd;
+  --deco: #c3cdd5;
   --ink: #14191d;
   --muted: #55626d;
   --line: #c6cfd6;
@@ -84,13 +84,9 @@ button {
   user-select: none;
   cursor: grab;
   background-color: var(--bg);
-}
-.doodles {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
 }
 .world {
   position: absolute;
@@ -127,47 +123,67 @@ button {
   outline: 1px solid var(--line);
 }
 
-/* ---------- logos flutuantes do fundo (aparecem no "Mapa") ---------- */
-.bglogos {
+/* ---------- fundo do canvas: desenhos técnicos e logos (componente Decor) ---------- */
+.decor {
   position: absolute;
   left: 0;
   top: 0;
+  width: 0;
+  height: 0;
   pointer-events: none;
+  color: var(--deco);
 }
-.bglogo {
+.decor .art,
+.decor .bgl {
   position: absolute;
-  width: 1300px;
-  transform: translate(-50%, -50%) rotate(var(--r));
-  animation: drift 9s ease-in-out infinite;
-  animation-delay: var(--d);
 }
-.bglogo::before {
-  content: "";
-  position: absolute;
-  inset: -260px -180px;
-  border-radius: 50%;
-  background: radial-gradient(
-    closest-side,
-    color-mix(in srgb, var(--c) 26%, transparent),
-    transparent
-  );
+
+:root,
+:root[data-theme="dark"] {
+  --deco: #4f6679;
 }
-.bglogo .logo {
-  position: relative;
+:root[data-theme="light"] {
+  --deco: #7d8d9b;
+}
+
+.decor .art {
+  opacity: 0.8;
+} /* desenhos */
+
+.decor svg {
+  stroke-width: 2.4px; /* traço mais grosso, constante em qualquer zoom */
+}
+.node.root > .inner > .slide {
+  background: color-mix(in srgb, var(--bg) 80%, transparent); /* deixa o fundo aparecer atrás das telas */
+}
+
+.decor .art svg {
   display: block;
-  height: auto;
   width: 100%;
-  opacity: 0.55;
+  height: 100%;
 }
-.bglogo .logo img {
+.decor svg * {
+  vector-effect: non-scaling-stroke;
+} /* o traço continua visível mesmo com o mapa bem afastado */
+.bgl {
+  opacity: 0.8;
+} /* logos: mais presentes que os desenhos */
+.bgl img {
+  display: block;
   width: 100%;
   height: auto;
-  object-fit: contain;
 }
-@keyframes drift {
-  50% {
-    transform: translate(-50%, calc(-50% - 22px)) rotate(calc(var(--r) + 3deg));
-  }
+.bgl .lb {
+  display: none;
+}
+:root[data-theme="light"] .bgl {
+  opacity: 0.8;
+}
+:root[data-theme="light"] .bgl .lw {
+  display: none;
+}
+:root[data-theme="light"] .bgl .lb {
+  display: block;
 }
 
 /* ---------- elementos comuns ---------- */
@@ -240,44 +256,71 @@ button {
   cursor: pointer;
 }
 
-/* ---------- foto nítida (módulos): imagem inteira + fundo desfocado ---------- */
-.pfit {
+/* ---------- módulo: foto em moldura com cantoneiras e régua ---------- */
+.frame {
+  position: absolute;
+  left: 120px;
+  top: 190px;
+  width: 640px;
+  height: 480px;
+  border: 1px solid var(--line);
+}
+.frame .photo {
+  filter: saturate(1.05) contrast(1.03);
+}
+.frame .photo::after {
+  content: "";
   position: absolute;
   inset: 0;
-  overflow: hidden;
-  background: var(--bg2);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--c) 30%, transparent),
+    transparent 55%
+  );
+  mix-blend-mode: soft-light;
 }
-.pf-bg {
+.cn {
   position: absolute;
-  inset: -60px;
-  background-size: cover;
-  background-position: center;
-  transform: scale(1.1);
-  filter: blur(38px) saturate(1.25) brightness(0.65);
+  width: 38px;
+  height: 38px;
+  border: 0 solid var(--c);
 }
-.pf-main {
+.cn.tl {
+  left: -14px;
+  top: -14px;
+  border-left-width: 4px;
+  border-top-width: 4px;
+}
+.cn.tr {
+  right: -14px;
+  top: -14px;
+  border-right-width: 4px;
+  border-top-width: 4px;
+}
+.cn.bl {
+  left: -14px;
+  bottom: -14px;
+  border-left-width: 4px;
+  border-bottom-width: 4px;
+}
+.cn.br {
+  right: -14px;
+  bottom: -14px;
+  border-right-width: 4px;
+  border-bottom-width: 4px;
+}
+.ruler {
   position: absolute;
-  inset: 0 130px 0 0;
-  margin: auto;
-  width: auto;
-  height: auto;
-  min-width: 480px;
-  max-width: 560px;
-  max-height: 780px;
-  object-fit: contain;
-  border-radius: 18px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
-}
-
-.pf-empty {
-  position: absolute;
-  inset: 0 130px 0 0;
-  display: grid;
-  place-items: center;
-}
-.pf-empty .logo {
-  height: 120px;
+  left: 120px;
+  top: 712px;
+  width: 640px;
+  height: 22px;
   opacity: 0.55;
+  background:
+    repeating-linear-gradient(90deg, var(--ink) 0 1px, transparent 1px 16px) 0
+      0 / 100% 12px no-repeat,
+    repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 80px) 0
+      0 / 100% 22px no-repeat;
 }
 
 /* ---------- miniaturas (cards): só texto, sem fotos ---------- */
@@ -288,23 +331,44 @@ button {
   background: var(--bg2);
   border-top: 5px solid var(--c);
 }
-.card.company,
-.card.service {
+.card.company {
   padding: 26px 30px;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
-.card.company .logo,
-.card.service .logo {
+.card.company .logo {
   height: 54px;
   margin-bottom: 10px;
+}
+.card.service {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  padding: 26px 30px;
+}
+.wc-ico {
+  flex: 0 0 120px;
+  height: 190px;
+  color: var(--c);
+}
+.wc-ico svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.wc-text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
 }
 .card.company strong {
   font-size: 46px;
 }
 .card.service strong {
-  font-size: 44px;
+  font-size: 46px;
+  line-height: 1.02;
 }
 .card.company span:not(.logo) {
   font-size: 22px;
@@ -316,7 +380,7 @@ button {
   color: var(--muted);
   line-height: 1.25;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -458,7 +522,7 @@ button {
   left: 780px;
   right: 0;
   bottom: auto;
-  height: 330px;
+  height: 240px;
   opacity: 0.9;
   clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%);
 }
@@ -492,7 +556,7 @@ button {
 }
 .modules-hint {
   left: 900px;
-  top: 270px;
+  top: 280px;
   font-size: 24px;
 }
 .foot {
@@ -578,16 +642,24 @@ button {
   gap: 40px;
 }
 
+.wpick {
+  left: 120px;
+  top: 335px;
+}
 .band {
   position: absolute;
-  left: 120px;
-  right: 120px;
-  top: 340px;
+  left: 60px;
+  right: 60px;
+  top: 750px;
 }
 .band-title {
-  font-size: 26px;
+  font-size: 24px;
   color: var(--muted);
-  margin-bottom: 22px;
+  margin-bottom: 16px;
+}
+.band .chip {
+  font-size: 26px;
+  padding: 10px 22px;
 }
 .chips {
   display: flex;
@@ -615,6 +687,21 @@ button {
   top: 90px;
   width: 820px;
 }
+.service-head {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.ico {
+  height: 120px;
+  width: 70px;
+  color: var(--c);
+}
+.ico svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
 .service .title {
   font-size: 84px;
   margin-top: 34px;
@@ -631,12 +718,12 @@ button {
   list-style: none;
   margin-top: 20px;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 12px;
 }
 .service li {
-  font-size: 27px;
-  padding: 14px 24px;
+  font-size: 24px;
+  padding: 12px 22px;
   background: var(--bg2);
   border-left: 6px solid var(--c);
 }
@@ -798,32 +885,32 @@ button {
   font-size: 30px;
 }
 
-/* ---------- controles (cápsulas de vidro, botões grandes para toque) ---------- */
+/* ---------- controles: barra arredondada e compacta ---------- */
 .nav,
 .tools {
   position: fixed;
   display: flex;
-  gap: 4px;
+  align-items: center;
+  gap: 2px;
   padding: 6px;
   border-radius: 999px;
   cursor: default;
-  background: color-mix(in srgb, var(--bg) 68%, transparent);
-  backdrop-filter: blur(14px) saturate(1.3);
+  background: color-mix(in srgb, var(--bg) 74%, transparent);
+  backdrop-filter: blur(16px) saturate(1.3);
   border: 1px solid var(--line);
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.28),
-    inset 0 1px 0 color-mix(in srgb, var(--ink) 12%, transparent);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
 }
 .nav {
   left: 50%;
-  bottom: 20px;
+  bottom: 22px;
   transform: translateX(-50%);
   width: max-content;
   max-width: calc(100vw - 24px);
 }
 .tools {
-  right: 24px;
-  top: 24px;
+  right: 22px;
+  top: 22px;
+  gap: 4px;
 }
 .nav button,
 .tools button {
@@ -833,29 +920,39 @@ button {
   flex-shrink: 0;
   white-space: nowrap;
   border-radius: 999px;
-  font-size: 20px;
-  min-width: 56px;
-  height: 56px;
+  height: 52px;
+  min-width: 52px;
   padding: 0 22px;
+  font-size: 20px;
+  letter-spacing: 0.01em;
   transition:
     background 0.2s,
     color 0.2s;
 }
-.nav button.arrow {
+.nav .arrow {
   font-size: 30px;
+  padding: 0;
   line-height: 1;
-  padding: 0 0 4px;
-  width: 56px;
+}
+.nav .sep {
+  width: 1px;
+  height: 24px;
+  background: var(--line);
+  margin: 0 6px;
+  flex-shrink: 0;
 }
 .tools button {
-  min-width: 52px;
-  height: 52px;
-  padding: 0 16px;
-  font-size: 22px;
+  width: 52px;
+  padding: 0;
+  font-size: 19px;
 }
 .nav button.on {
   background: var(--ink);
   color: var(--bg);
+}
+.nav button:not(.on):hover,
+.tools button:hover {
+  background: color-mix(in srgb, var(--ink) 12%, transparent);
 }
 .nav button:active,
 .tools button:active {
@@ -870,8 +967,5 @@ button {
 @media (prefers-reduced-motion: reduce) {
   .world {
     transition: none !important;
-  }
-  .bglogo {
-    animation: none;
   }
 }

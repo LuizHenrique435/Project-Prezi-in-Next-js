@@ -16,31 +16,18 @@ import {
   RECT,
   SECTIONS,
   rootOf,
-  type CompanyId,
   type Kind,
 } from "@/data/content";
 import { useApp } from "./Providers";
-import { CardFace, Logo, Slide } from "./Slides";
+import Decor from "./Decor";
+import { CardFace, Slide } from "./Slides";
 
 type Cam = { x: number; y: number; k: number }; // (x,y) = ponto do mundo no centro da tela
 type Vp = { w: number; h: number };
 
-const NAV_H = 110; // altura reservada para a barra de navegação
+const NAV_H = 120; // altura reservada para a barra de navegação
 const MAX_K = 60; // as telas aninhadas ficam pequenas no mundo, então o zoom máximo é alto
 const IDLE_MS = 90_000; // volta ao início após 90 s sem toque
-
-// Logos grandes espalhados nos espaços vazios do mundo: aparecem ao tocar em "Mapa".
-const BG_LOGOS: {
-  c: CompanyId;
-  x: number;
-  y: number;
-  r: number;
-  delay: number;
-}[] = [
-  { c: "m3code", x: -1700, y: -280, r: -7, delay: 0 },
-  { c: "toolservices", x: 0, y: 1150, r: 4, delay: -3 },
-  { c: "tsmtools", x: 2500, y: 1200, r: -5, delay: -6 },
-];
 
 const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
 
@@ -274,6 +261,7 @@ export default function PreziCanvas() {
   };
 
   /* ---------- render ---------- */
+  const grid = clamp(160 * cam.k, 40, 400);
   const active = current === "map" ? "" : rootOf(current);
   const stop = (e: PointerEvent) => e.stopPropagation();
 
@@ -285,9 +273,11 @@ export default function PreziCanvas() {
       onPointerMove={onMove}
       onPointerUp={onUp}
       onPointerCancel={(e) => onUp(e, true)}
+      style={{
+        backgroundSize: `${grid}px ${grid}px`,
+        backgroundPosition: `${vp.w / 2 - cam.x * cam.k}px ${vp.h / 2 - cam.y * cam.k}px`,
+      }}
     >
-      <Doodles cam={cam} vp={vp} />
-
       <div
         className="world"
         style={{
@@ -297,23 +287,7 @@ export default function PreziCanvas() {
             : "none",
         }}
       >
-        <div className="bglogos" aria-hidden>
-          {BG_LOGOS.map((b) => (
-            <div
-              key={b.c}
-              className="bglogo"
-              style={{
-                left: b.x,
-                top: b.y,
-                ["--r" as string]: `${b.r}deg`,
-                ["--d" as string]: `${b.delay}s`,
-                ["--c" as string]: COMPANY[b.c].color,
-              }}
-            >
-              <Logo c={b.c} />
-            </div>
-          ))}
-        </div>
+        <Decor />
         {["home", "about", "what", "social", "overview"].map((id) => (
           <NodeView key={id} id={id} cam={cam} vp={vp} />
         ))}
@@ -342,6 +316,7 @@ export default function PreziCanvas() {
         >
           ‹
         </button>
+        <i className="sep" />
         {SECTIONS.map((s) => (
           <button
             key={s}
@@ -351,12 +326,14 @@ export default function PreziCanvas() {
             {u(s)}
           </button>
         ))}
+        <i className="sep" />
         <button
           className={current === "map" ? "on" : ""}
           onClick={() => flyTo("map")}
         >
           {u("map")}
         </button>
+        <i className="sep" />
         <button
           className="arrow"
           onClick={() => step(1)}
@@ -366,120 +343,6 @@ export default function PreziCanvas() {
         </button>
       </nav>
     </div>
-  );
-}
-
-/* Fundo técnico: fresas, réguas, cotas, HD, processador, circuito integrado e trilhas.
-   Um único bloco de 600x600 que se repete e acompanha a câmera (efeito de profundidade). */
-function Doodles({ cam, vp }: { cam: Cam; vp: Vp }) {
-  const s = clamp(cam.k, 0.5, 1.2);
-  const ox = vp.w / 2 - cam.x * cam.k;
-  const oy = vp.h / 2 - cam.y * cam.k;
-  return (
-    <svg className="doodles" aria-hidden>
-      <defs>
-        <pattern
-          id="tech"
-          width="600"
-          height="600"
-          patternUnits="userSpaceOnUse"
-          patternTransform={`translate(${ox} ${oy}) scale(${s})`}
-        >
-          <g
-            fill="none"
-            stroke="var(--doodle)"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            {/* fresa */}
-            <g transform="translate(120 110) rotate(40)">
-              <rect x="-14" y="-90" width="28" height="120" rx="3" />
-              <path d="M-14 -90 L-8 -102 H8 L14 -90 M-14 -68 L14 -48 M-14 -43 L14 -23 M-14 -18 L14 2 M-14 7 L14 27" />
-              <rect x="-10" y="30" width="20" height="70" rx="2" />
-            </g>
-            {/* régua */}
-            <g transform="translate(260 40)">
-              <rect width="240" height="46" rx="3" />
-              <path d="M5 0 H235" strokeWidth="12" strokeDasharray="1.5 8.5" />
-              <path d="M5 0 H235" strokeWidth="22" strokeDasharray="1.5 48.5" />
-            </g>
-            {/* cota */}
-            <g transform="translate(60 270)">
-              <path d="M0 0 H140 M0 -9 V9 M140 -9 V9 M0 0 l11 -4 v8 z M140 0 l-11 -4 v8 z" />
-              <text
-                x="70"
-                y="-12"
-                textAnchor="middle"
-                fontFamily="monospace"
-                fontSize="15"
-                fill="var(--doodle)"
-                stroke="none"
-              >
-                Ø 12.00
-              </text>
-            </g>
-            {/* HD */}
-            <g transform="translate(400 150)">
-              <rect width="150" height="110" rx="10" />
-              <circle cx="60" cy="55" r="40" />
-              <circle cx="60" cy="55" r="10" />
-              <path d="M132 20 L72 50" />
-              <circle cx="132" cy="20" r="6" />
-              <circle cx="10" cy="10" r="3" />
-              <circle cx="140" cy="100" r="3" />
-              <circle cx="10" cy="100" r="3" />
-            </g>
-            {/* processador */}
-            <g transform="translate(60 360)">
-              <rect width="100" height="100" rx="6" />
-              <rect x="26" y="26" width="48" height="48" rx="3" />
-              <circle cx="13" cy="13" r="3" />
-              <path
-                d="M8 -6 H92 M8 106 H92"
-                strokeWidth="12"
-                strokeDasharray="2 12"
-              />
-              <path
-                d="M-6 8 V92 M106 8 V92"
-                strokeWidth="12"
-                strokeDasharray="2 12"
-              />
-            </g>
-            {/* circuito integrado */}
-            <g transform="translate(250 340)">
-              <rect width="130" height="60" rx="3" />
-              <path d="M0 24 A6 6 0 0 1 0 36" />
-              <path
-                d="M12 -6 H118 M12 66 H118"
-                strokeWidth="10"
-                strokeDasharray="2 14"
-              />
-            </g>
-            {/* trilhas */}
-            <g transform="translate(410 330)">
-              <path d="M0 0 H60 L90 30 H140 M0 40 H30 L60 70 H140 M0 80 H140" />
-              <circle cx="140" cy="30" r="5" />
-              <circle cx="140" cy="70" r="5" />
-              <circle cx="140" cy="80" r="5" />
-            </g>
-            {/* fresa pequena */}
-            <g transform="translate(300 530) rotate(-62) scale(.7)">
-              <rect x="-14" y="-90" width="28" height="120" rx="3" />
-              <path d="M-14 -90 L-8 -102 H8 L14 -90 M-14 -68 L14 -48 M-14 -43 L14 -23 M-14 -18 L14 2 M-14 7 L14 27" />
-              <rect x="-10" y="30" width="20" height="70" rx="2" />
-            </g>
-            {/* trilha curta */}
-            <g transform="translate(440 520)">
-              <path d="M0 0 H40 L60 -20 H110 M0 24 H110" />
-              <circle cx="110" cy="-20" r="5" />
-              <circle cx="110" cy="24" r="5" />
-            </g>
-          </g>
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#tech)" />
-    </svg>
   );
 }
 
