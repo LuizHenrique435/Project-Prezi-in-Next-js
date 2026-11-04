@@ -64,7 +64,11 @@ export const COMPANY: Record<
       { id: "recondicionamento", img: "/img/ts-sol3.jpg" },
       { id: "suporte", img: "/img/ts-sol4.jpg" },
     ],
-    socials: [], // TODO
+    socials: [
+  { label: "Instagram", url: "https://www.instagram.com/toolservices/" },
+  { label: "LinkedIn", url: "https://www.linkedin.com/company/tool-services-ferramentas/" },
+  { label: "Facebook", url: "https://www.facebook.com/profile.php?id=61578150215695" },
+],
   },
 };
 
@@ -136,33 +140,81 @@ export type NodeInfo = {
   module?: string;
 };
 
-export const SLIDE = { w: 1920, h: 1080 };
+// Modo totem (tela em pé 1080x1920) ou normal (1920x1080). Escolha salva no navegador pelo botão da barra superior.
+// Também dá para forçar pela URL: /?modo=totem ou /?modo=normal. Sem escolha salva, vale a orientação da janela.
+function readTotem(): boolean {
+  if (typeof window === "undefined") return false; // renderização no servidor: o canvas só aparece depois de montar
+  try {
+    const q = new URLSearchParams(location.search).get("modo");
+    if (q === "totem" || q === "normal") localStorage.setItem("mode", q);
+    const saved = localStorage.getItem("mode");
+    if (saved === "totem" || saved === "normal") return saved === "totem";
+  } catch {}
+  return window.innerHeight > window.innerWidth;
+}
+export const TOTEM = readTotem();
+export const SLIDE = TOTEM ? { w: 1080, h: 1920 } : { w: 1920, h: 1080 };
 
-const ABOUT_BOXES = [
-  { x: 120, y: 690, w: 520 },
-  { x: 700, y: 690, w: 520 },
-  { x: 1280, y: 690, w: 520 },
-];
+const ABOUT_BOXES = TOTEM
+  ? [
+      { x: 70, y: 1230, w: 300 },
+      { x: 390, y: 1230, w: 300 },
+      { x: 710, y: 1230, w: 300 },
+    ]
+  : [
+      { x: 120, y: 690, w: 520 },
+      { x: 700, y: 690, w: 520 },
+      { x: 1280, y: 690, w: 520 },
+    ];
 // Ordem em "O que fazemos": peças, gerenciamento, software.
 const WHAT_ORDER: CompanyId[] = ["tsmtools", "toolservices", "m3code"];
-const WHAT_BOXES = [
-  { x: 60, y: 390, w: 560 },
-  { x: 680, y: 390, w: 560 },
-  { x: 1300, y: 390, w: 560 },
-];
-const MODULE_BOXES = [
-  { x: 900, y: 330, w: 420 },
-  { x: 1360, y: 330, w: 420 },
-  { x: 900, y: 606, w: 420 },
-  { x: 1360, y: 606, w: 420 },
-];
+const WHAT_BOXES = TOTEM
+  ? [
+      { x: 70, y: 1010, w: 300 },
+      { x: 390, y: 1010, w: 300 },
+      { x: 710, y: 1010, w: 300 },
+    ]
+  : [
+      { x: 60, y: 390, w: 560 },
+      { x: 680, y: 390, w: 560 },
+      { x: 1300, y: 390, w: 560 },
+    ];
+const MODULE_BOXES = TOTEM
+  ? [
+      { x: 70, y: 1250, w: 222 },
+      { x: 309, y: 1250, w: 222 },
+      { x: 548, y: 1250, w: 222 },
+      { x: 787, y: 1250, w: 222 },
+    ]
+  : [
+      { x: 900, y: 330, w: 420 },
+      { x: 1360, y: 330, w: 420 },
+      { x: 900, y: 606, w: 420 },
+      { x: 1360, y: 606, w: 420 },
+    ];
 
 export const NODES: NodeInfo[] = [
   { id: "home", kind: "home", at: { cx: 0, cy: 0 } },
-  { id: "about", kind: "about", at: { cx: 2700, cy: 250 } },
-  { id: "what", kind: "what", at: { cx: 2300, cy: 2150 } },
-  { id: "social", kind: "social", at: { cx: -300, cy: 2250 } },
-  { id: "overview", kind: "overview", at: { cx: -2700, cy: 1150 } },
+  {
+    id: "about",
+    kind: "about",
+    at: TOTEM ? { cx: 1900, cy: 100 } : { cx: 2700, cy: 250 },
+  },
+  {
+    id: "what",
+    kind: "what",
+    at: TOTEM ? { cx: 1700, cy: 2350 } : { cx: 2300, cy: 2150 },
+  },
+  {
+    id: "social",
+    kind: "social",
+    at: TOTEM ? { cx: -300, cy: 2500 } : { cx: -300, cy: 2250 },
+  },
+  {
+    id: "overview",
+    kind: "overview",
+    at: TOTEM ? { cx: -2300, cy: 1200 } : { cx: -2700, cy: 1150 },
+  },
   ...COMPANY_IDS.map(
     (c, i): NodeInfo => ({
       id: c,

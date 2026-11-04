@@ -3,6 +3,7 @@
 import {
   useCallback,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
   type PointerEvent,
@@ -15,6 +16,8 @@ import {
   PATH,
   RECT,
   SECTIONS,
+  SLIDE,
+  TOTEM,
   rootOf,
   type Kind,
 } from "@/data/content";
@@ -25,7 +28,7 @@ import { CardFace, Slide } from "./Slides";
 type Cam = { x: number; y: number; k: number }; // (x,y) = ponto do mundo no centro da tela
 type Vp = { w: number; h: number };
 
-const NAV_H = 120; // altura reservada para a barra de navegação
+const NAV_H = TOTEM ? 200 : 120; // altura reservada para a barra de navegação
 const MAX_K = 60; // as telas aninhadas ficam pequenas no mundo, então o zoom máximo é alto
 const IDLE_MS = 90_000; // volta ao início após 90 s sem toque
 
@@ -44,7 +47,7 @@ function zoomAt(c: Cam, sx: number, sy: number, vp: Vp, k2: number): Cam {
   return { k, x: wx - (sx - vp.w / 2) / k, y: wy - (sy - vp.h / 2) / k };
 }
 
-export default function PreziCanvas() {
+function Canvas() {
   const u = useTranslations("ui");
   const { locale, theme, toggleLocale, toggleTheme } = useApp();
 
@@ -261,6 +264,22 @@ export default function PreziCanvas() {
   };
 
   /* ---------- render ---------- */
+  // Troca de modo: grava a escolha e recarrega. No totem exige segurar o botão por 1,2 s (evita toque acidental do público).
+  const holdRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const switchMode = () => {
+    try {
+      localStorage.setItem("mode", TOTEM ? "normal" : "totem");
+    } catch {}
+    location.reload();
+  };
+  const modeLabel =
+    locale === "pt-BR"
+      ? TOTEM
+        ? "Modo normal (segure)"
+        : "Modo totem"
+      : TOTEM
+        ? "Normal mode (hold)"
+        : "Totem mode";
   const grid = clamp(160 * cam.k, 40, 400);
   const active = current === "map" ? "" : rootOf(current);
   const stop = (e: PointerEvent) => e.stopPropagation();
@@ -305,6 +324,26 @@ export default function PreziCanvas() {
           aria-label={u("theme")}
         >
           {theme === "dark" ? "☀" : "☾"}
+        </button>
+        <button
+          aria-label={modeLabel}
+          title={modeLabel}
+          onClick={TOTEM ? undefined : switchMode}
+          onPointerDown={
+            TOTEM
+              ? () => (holdRef.current = setTimeout(switchMode, 1200))
+              : undefined
+          }
+          onPointerUp={() => clearTimeout(holdRef.current)}
+          onPointerLeave={() => clearTimeout(holdRef.current)}
+        >
+          <svg viewBox="0 0 24 24" aria-hidden>
+            {TOTEM ? (
+              <rect x="2" y="6" width="20" height="12" rx="2" />
+            ) : (
+              <rect x="7" y="2" width="10" height="20" rx="2" />
+            )}
+          </svg>
         </button>
       </div>
 
@@ -356,8 +395,13 @@ function NodeView({ id, cam, vp }: { id: string; cam: Cam; vp: Vp }) {
   const box = n.box;
   const p = root ? 1 : clamp((cam.k * r.w) / vp.w - 0.3, 0, 0.25) / 0.25;
   const outer = root
-    ? { left: r.left, top: r.top, width: 1920, height: 1080 }
-    : { left: box!.x, top: box!.y, width: box!.w, height: (box!.w * 9) / 16 };
+    ? { left: r.left, top: r.top, width: SLIDE.w, height: SLIDE.h }
+    : {
+        left: box!.x,
+        top: box!.y,
+        width: box!.w,
+        height: (box!.w * SLIDE.h) / SLIDE.w,
+      };
   const color = n.company ? COMPANY[n.company].color : undefined;
 
   return (
@@ -373,7 +417,7 @@ function NodeView({ id, cam, vp }: { id: string; cam: Cam; vp: Vp }) {
     >
       <div
         className="inner"
-        style={{ transform: `scale(${root ? 1 : box!.w / 1920})` }}
+        style={{ transform: `scale(${root ? 1 : box!.w / SLIDE.w})` }}
       >
         <Slide id={id} />
         {kids.map((k) => (
@@ -385,7 +429,7 @@ function NodeView({ id, cam, vp }: { id: string; cam: Cam; vp: Vp }) {
               left: k.box!.x,
               top: k.box!.y,
               width: k.box!.w,
-              height: (k.box!.w * 9) / 16,
+              height: (k.box!.w * SLIDE.h) / SLIDE.w,
               ["--c" as string]: COMPANY[k.company!].color,
             }}
           >
@@ -401,3 +445,13 @@ function NodeView({ id, cam, vp }: { id: string; cam: Cam; vp: Vp }) {
 }
 
 export type { Kind };
+
+// O formato (TOTEM) só é conhecido no navegador. Por isso o canvas aparece depois de montar e marca o <html> com data-totem.
+export default function PreziCanvas() {
+  const [ready, setReady] = useState(false);
+  useLayoutEffect(() => {
+    document.documentElement.toggleAttribute("data-totem", TOTEM);
+    setReady(true);
+  }, []);
+  return ready ? <Canvas /> : null;
+}
