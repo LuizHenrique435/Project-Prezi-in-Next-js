@@ -1,0 +1,358 @@
+/* Modo totem de chão: tela em pé 1080x1920.
+   Só vale quando NEXT_PUBLIC_TOTEM=1 (o layout.tsx coloca data-totem no <html>). */
+
+html[data-totem] .inner,
+html[data-totem] .slide {
+  width: 1080px;
+  height: 1920px;
+}
+html[data-totem],
+html[data-totem] * {
+  cursor: none !important;
+} /* esconde o cursor; apague esta regra se for testar com mouse */
+
+/* ---------- recepção ---------- */
+html[data-totem] .wphoto {
+  left: 0;
+  width: 100%;
+  bottom: auto;
+  height: 760px;
+  background-position: center;
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+}
+html[data-totem] .wcopy {
+  left: 70px;
+  top: 800px;
+  width: 940px;
+}
+html[data-totem] .welcome .display {
+  font-size: 130px;
+}
+html[data-totem] .group {
+  font-size: 54px;
+}
+html[data-totem] .welcome .lead {
+  font-size: 28px;
+}
+html[data-totem] .cta {
+  font-size: 34px;
+  padding: 22px 56px;
+}
+html[data-totem] .plate {
+  left: 70px;
+  right: 70px;
+  bottom: 170px;
+  gap: 40px;
+  padding: 28px 36px;
+  justify-content: space-between;
+}
+html[data-totem] .plate .logo {
+  height: 70px;
+}
+html[data-totem] .hint {
+  left: 70px;
+  bottom: 100px;
+}
+
+/* ---------- quem somos ---------- */
+html[data-totem] .stripe {
+  top: auto;
+  bottom: -500px;
+  right: -300px;
+  width: 1000px;
+  height: 1000px;
+}
+html[data-totem] .about-copy {
+  left: 70px;
+  top: 90px;
+  width: 940px;
+}
+html[data-totem] .about .title {
+  font-size: 96px;
+}
+html[data-totem] .about .lead {
+  font-size: 30px;
+  max-width: 940px;
+}
+html[data-totem] .sectors {
+  font-size: 26px;
+  max-width: 940px;
+}
+html[data-totem] .stats {
+  left: 70px;
+  top: 620px;
+  width: 940px;
+  gap: 36px 30px;
+}
+html[data-totem] .stats b {
+  font-size: 80px;
+}
+html[data-totem] .about .pick {
+  left: 70px;
+  top: 1170px;
+}
+
+/* ---------- cards (miniaturas das telas filhas) ---------- */
+html[data-totem] .card.company {
+  padding: 22px;
+}
+html[data-totem] .card.company .logo {
+  height: 46px;
+}
+html[data-totem] .card.company strong {
+  font-size: 40px;
+}
+html[data-totem] .card.company span:not(.logo) {
+  font-size: 21px;
+}
+html[data-totem] .card.service {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px;
+}
+html[data-totem] .wc-ico {
+  flex: 0 0 150px;
+  width: 90px;
+  height: 150px;
+}
+html[data-totem] .card.service strong {
+  font-size: 40px;
+}
+html[data-totem] .card.service span:not(.logo) {
+  font-size: 21px;
+  -webkit-line-clamp: 6;
+}
+html[data-totem] .card.module {
+  padding: 20px 18px;
+  overflow-wrap: anywhere;
+}
+html[data-totem] .card.module strong {
+  font-size: 28px;
+}
+html[data-totem] .card.module span {
+  font-size: 19px;
+  -webkit-line-clamp: 4;
+}
+
+/* ---------- empresa ---------- */
+html[data-totem] .company .hero {
+  left: 0;
+  right: 0;
+  height: 380px;
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+}
+html[data-totem] .company-copy {
+  left: 70px;
+  top: 420px;
+  width: 940px;
+}
+html[data-totem] .company .title {
+  font-size: 70px;
+}
+html[data-totem] .company .lead {
+  font-size: 28px;
+}
+html[data-totem] .highlight {
+  font-size: 26px;
+  max-width: 940px;
+}
+html[data-totem] .modules-hint {
+  left: 70px;
+  top: 1190px;
+  font-size: 26px;
+}
+html[data-totem] .foot {
+  left: 70px;
+  bottom: 70px;
+}
+html[data-totem] .back {
+  left: 70px;
+  bottom: 70px;
+}
+
+/* ---------- módulo ---------- */
+html[data-totem] .frame {
+  left: 70px;
+  top: 90px;
+  width: 940px;
+  height: 560px;
+}
+html[data-totem] .ruler {
+  left: 70px;
+  top: 672px;
+  width: 940px;
+}
+html[data-totem] .module-copy {
+  left: 70px;
+  top: 730px;
+  width: 940px;
+}
+html[data-totem] .module .title {
+  font-size: 68px;
+}
+html[data-totem] .module .lead {
+  font-size: 28px;
+}
+html[data-totem] .module .back {
+  left: 70px;
+}
+
+/* ---------- o que fazemos + detalhe de cada empresa ---------- */
+html[data-totem] .what .title,
+html[data-totem] .social .title {
+  left: 70px;
+  top: 90px;
+  font-size: 96px;
+}
+html[data-totem] .what .lead,
+html[data-totem] .social .lead {
+  left: 70px;
+  top: 215px;
+  max-width: 940px;
+  font-size: 28px;
+}
+html[data-totem] .band {
+  left: 70px;
+  right: 70px;
+  top: 430px;
+}
+html[data-totem] .wpick {
+  left: 70px;
+  top: 950px;
+}
+html[data-totem] .service-copy {
+  left: 70px;
+  top: 90px;
+  width: 940px;
+}
+html[data-totem] .service .title {
+  font-size: 76px;
+}
+html[data-totem] .service .lead {
+  font-size: 28px;
+}
+html[data-totem] .service-partners {
+  left: 70px;
+  right: 70px;
+  top: 860px;
+}
+html[data-totem] .chips.big .chip {
+  font-size: 34px;
+  padding: 16px 28px;
+}
+
+/* ---------- redes sociais ---------- */
+html[data-totem] .cols {
+  left: 70px;
+  right: 70px;
+  top: 400px;
+  bottom: auto;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+html[data-totem] .scol {
+  padding: 30px 40px;
+  gap: 26px;
+}
+html[data-totem] .scol .logo {
+  height: 60px;
+}
+
+/* ---------- visão geral ---------- */
+html[data-totem] .flows {
+  left: 70px;
+  top: 70px;
+  width: 940px;
+}
+html[data-totem] .flows .title {
+  font-size: 84px;
+}
+html[data-totem] .overview .lead {
+  font-size: 26px;
+  margin-top: 12px;
+}
+html[data-totem] .flow {
+  margin-top: 22px;
+}
+html[data-totem] .flow .logo {
+  height: 40px;
+}
+html[data-totem] .flow ol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+html[data-totem] .flow li,
+html[data-totem] .flow li:first-child {
+  min-height: 70px;
+  padding: 12px 20px;
+  font-size: 22px;
+  clip-path: none;
+}
+html[data-totem] .thanks {
+  left: 0;
+  right: 0;
+  top: auto;
+  bottom: 0;
+  width: auto;
+  height: 560px;
+  padding: 40px 70px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 20px;
+  align-content: start;
+}
+html[data-totem] .thanks .title,
+html[data-totem] .thanks .lead {
+  grid-column: 1 / -1;
+}
+html[data-totem] .thanks .title {
+  font-size: 64px;
+}
+html[data-totem] .thanks .lead {
+  font-size: 24px;
+  margin-top: 18px;
+}
+html[data-totem] .quote {
+  margin-top: 24px;
+  padding-left: 14px;
+  font-size: 19px;
+}
+html[data-totem] .quote cite {
+  font-size: 15px;
+}
+
+/* ---------- barra de navegação: mais perto da altura da mão, botões grandes ---------- */
+html[data-totem] .nav {
+  bottom: 70px;
+}
+html[data-totem] .nav button {
+  height: 56px;
+  min-width: 56px;
+  padding: 0 14px;
+  font-size: 17px;
+}
+html[data-totem] .nav .arrow {
+  font-size: 32px;
+  padding: 0;
+}
+html[data-totem] .tools {
+  top: auto;
+  right: 50%;
+  bottom: 150px;
+  transform: translateX(50%);
+}
+html[data-totem] .tools button {
+  width: 56px;
+  height: 56px;
+}
+
+/* ---------- botão de modo (totem / normal): vale nos dois modos ---------- */
+.tools button svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
